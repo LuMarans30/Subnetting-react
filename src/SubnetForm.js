@@ -24,6 +24,10 @@ const SubnetForm = (props) => {
     event.preventDefault();
     console.log(ipaddr, "/", cidr, " - numhost: ", numhost)
 
+    //disable the two fields: ipaddr and cidr
+    document.getElementById('ipaddr').disabled = true;
+    document.getElementById('cidr').disabled = true;
+
     props.OnSubmit(ipaddr, numhost, cidr)
   }
 
@@ -34,6 +38,7 @@ const SubnetForm = (props) => {
         <h2 style={styles.h2}>Create a new subnet</h2>
           <Stack direction="row" spacing={2}>
             <TextField
+              id='ipaddr'
               type="text"
               variant='outlined'
               color='secondary'
@@ -45,6 +50,7 @@ const SubnetForm = (props) => {
               required
             />
             <TextField
+              id='cidr'
               type="text"
               variant='outlined'
               color='secondary'
