@@ -2,12 +2,17 @@
 	animation: Gradient 35s ease infinite;
 	-webkit-animation: Gradient 35s ease infinite;
 	-moz-animation: Gradient 35s ease infinite;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
 	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	/*Disable scroll*/
 	overflow: hidden;
+	z-index: -1;
 }
 
 #gradient-dark {
@@ -21,7 +26,7 @@
 }
 
 .Card {
-	height: 100vh;
+	height: 100%;
 	width: max-content;
 	border-radius: 10px;
 	text-align: center;
