@@ -4,18 +4,19 @@ import { DataGrid } from '@mui/x-data-grid';
 
 const style = {
     height: '80%',
-    width: '65%',
-    marginTop: 20,
-    padding: 50
+    width: '0%',
+    marginTop: 50,
+    padding: 50,
+    border: '0px'
 }
 
 const columns = [
-    { field: 'ipaddr', headerName: 'Network IP Address', width: 200 },
-    { field: 'broadcast', headerName: 'Broadcast', width: 200 },
-    { field: 'range', headerName: 'Range', width: 250 },
-    { field: 'numhost', headerName: 'Number of Hosts', width: 200 },
-    { field: 'realnumhost', headerName: 'Real Number of Hosts', width: 200 },
-    { field: 'wastehost', headerName: 'Number of Wasted Hosts', width: 200 }
+    { field: 'ipaddr', headerName: 'Network IP Address', flex: 1},
+    { field: 'broadcast', headerName: 'Broadcast', flex: 1 },
+    { field: 'range', headerName: 'Range', flex: 1 },
+    { field: 'numhost', headerName: 'Number of Hosts', flex: 1},
+    { field: 'realnumhost', headerName: 'Real Number of Hosts', flex: 1},
+    { field: 'wastehost', headerName: 'Number of Wasted Hosts', flex: 1},
 ];
 
 const SubnetsGrid = (props) => {
