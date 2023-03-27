@@ -29,6 +29,11 @@ const SubnetForm = (props) => {
     props.OnSubmit(ipaddr, numhost)
   }
 
+  function isNumeric(str) {
+    if (typeof str != "string") return false
+    return !isNaN(str) && !isNaN(parseFloat(str)) 
+  }
+
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit} style={styles.form}>
@@ -52,7 +57,7 @@ const SubnetForm = (props) => {
             color='secondary'
             label="Number of hosts"
             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-            error={numhost.length > 0 && (numhost < 1 || numhost > 4294967295)}
+            error={numhost.length > 0 && (numhost < 1 || numhost > 4294967295 || !isNumeric(numhost))}
             helperText="must be greater than 1"
             onChange={e => setNumhost(e.target.value)}
             value={numhost}
