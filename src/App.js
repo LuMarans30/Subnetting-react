@@ -14,7 +14,7 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    maxWidth: 500,
+    maxWidth: 700,
     //Transparent blurry background
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     backdropFilter: 'blur(6px)',

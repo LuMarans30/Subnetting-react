@@ -21,7 +21,7 @@ const columns = [
 const SubnetsGrid = (props) => {
 
     return (
-        <DataGrid 
+        <DataGrid
             style={style}
             rows={props.rows}
             columns={columns}
