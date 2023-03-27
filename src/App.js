@@ -27,7 +27,7 @@ function App() {
   const theme = createTheme({
     palette: {
       mode: mode,
-    },
+    }
   });
 
   //Align the form in the center of the page vertically

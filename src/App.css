@@ -1,4 +1,5 @@
-#gradient-light, #gradient-dark {
+#gradient-light,
+#gradient-dark {
 	animation: Gradient 35s ease infinite;
 	-webkit-animation: Gradient 35s ease infinite;
 	-moz-animation: Gradient 35s ease infinite;
@@ -13,6 +14,10 @@
 	/*Disable scroll*/
 	overflow: hidden;
 	z-index: -1;
+}
+
+body {
+	transition: all 0.3s linear;
 }
 
 #gradient-dark {
