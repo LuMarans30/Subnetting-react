@@ -35,7 +35,7 @@ const SubnetForm = (props) => {
     <React.Fragment>
       <form onSubmit={handleSubmit} style={styles.form}>
         <Stack spacing={2} direction="column" sx={{ marginBottom: 4 }}>
-        <h2 style={styles.h2}>Create a new subnet</h2>
+          <h2 style={styles.h2}>Create a new subnet</h2>
           <Stack direction="row" spacing={2}>
             <TextField
               id='ipaddr'
