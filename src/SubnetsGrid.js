@@ -4,10 +4,9 @@ import { DataGrid } from '@mui/x-data-grid';
 
 const style = {
     height: '80%',
-    width: '100%',
+    width: '65%',
     marginTop: 20,
-    alignItems: 'center',
-    justifyContent: 'center'
+    padding: 50
 }
 
 const columns = [
@@ -28,6 +27,23 @@ const SubnetsGrid = (props) => {
             columns={columns}
             pageSize={props.pageSize}
             rowsPerPageOptions={[props.pageSize]}
+            sx={{
+                '& .MuiDataGrid-virtualScroller::-webkit-scrollbar': {
+                    height: 8,
+                    width: 8,
+                    background: '#F5F5F5',
+                    borderRadius: 10,
+                },
+                '& .MuiDataGrid-virtualScroller::-webkit-scrollbar-track': {
+                    borderRadius: 10,
+                    background: '#F5F5F5',
+                    height: 8,
+                },
+                '& .MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb': {
+                    backgroundColor: '#555',
+                    borderRadius: 10,
+                }
+            }}
         />
     )
 }

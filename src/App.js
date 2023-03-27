@@ -26,7 +26,6 @@ var subnetCalc = new SubnetCalculator();
 
 function App() {
 
-  var subnetForm = React.createRef();
   const [rows, setRows] = React.useState([]);
 
   return (
@@ -34,9 +33,8 @@ function App() {
       <Card className='Card' variant="outlined" style={styles.card}>
         <CardContent>
           <SubnetForm
-            ref={subnetForm}
-            OnSubmit={(ipaddr, numhost, cidr) => {
-              subnetCalc.addSubnet(ipaddr, numhost, cidr);
+            OnSubmit={(ipaddr, numhost) => {
+              subnetCalc.addSubnet(ipaddr, numhost);
               subnetCalc.createRows();
               setRows(subnetCalc.getRows());
             }}

@@ -41,39 +41,22 @@ class SubnetCalculator {
          */
         this.calculate = function (i) {
 
-            var ipaddr = this.subnets[i].ipaddr;
+            var ip = this.subnets[i].ipaddr;
             var numhost = parseInt(this.subnets[i].numhost) + 3; //Add 3 for the network, broadcast, and gateway addresses
 
-            var ipaddrParts = ipaddr.split("/");
-            var ip = ipaddrParts[0];
-            console.log("IP: ", ip);
-            var cidr = ipaddrParts[1];
-            console.log("CIDR: ", cidr);
-
             var hostBits = this.numToNextPowerOfTwo(numhost); //Number of bits needed to represent the number of hosts
-            console.log("Host bits: ", hostBits);
-
             var newcidr = 32 - hostBits; //New cidr
-            console.log("New CIDR: ", newcidr);
 
             var realnumhost = Math.pow(2, hostBits) - 3; //New number of hosts
-            console.log("New number of hosts: ", realnumhost);
-
             var wastehost = realnumhost - (numhost - 3); //Number of wasted hosts
-            console.log("Wasted hosts: ", wastehost);
 
             var ipbin = [];
             ip.split(".").forEach(octet => {
                 ipbin.push(parseInt(octet).toString(2).padStart(8, "0"));
             });
-            console.log("IP binary: ", ipbin);
 
             var mask = cidrToSubnetMask(newcidr);
-            console.log("Mask: ", mask);
-
             var result = getIpRange(ip, mask);
-
-            console.log("Network address: ", result.networkAddress, " - Broadcast address: ", result.broadcastAddress);
 
             this.subnets[i].ipaddr = result.networkAddress + "/" + newcidr;
             this.subnets[i].realnumhost = realnumhost;
@@ -85,10 +68,7 @@ class SubnetCalculator {
             var endIp = result.broadcastAddress.split(".");
             endIp[3] = parseInt(endIp[3]) - 2;
 
-            console.log("Start IP: ", startIp.join("."), " - End IP: ", endIp.join("."));
-
             var nextIp = this.getNextIp(result.broadcastAddress);
-            console.log("Next subnet IP: ", nextIp);
 
             return {
                 broadcast: result.broadcastAddress,
@@ -169,13 +149,12 @@ class SubnetCalculator {
          * Add a subnet to the list
          * @param {string} ipaddr
          * @param {number} numhost
-         * @param {number} cidr
          * @returns {void}
          */
-        this.addSubnet = function (ipaddr, numhost, cidr) {
+        this.addSubnet = function (ipaddr, numhost) {
             this.subnets = this.subnets.concat({
                 id: this.subnets.length + 1,
-                ipaddr: ipaddr + "/" + cidr,
+                ipaddr: ipaddr,
                 broadcast: "",
                 range: "",
                 numhost: numhost,
