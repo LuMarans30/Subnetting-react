@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/subnettingReact/static/css/main.171406e2.css",
-    "main.js": "/subnettingReact/static/js/main.c3bc577d.js",
+    "main.js": "/subnettingReact/static/js/main.cf88c57e.js",
     "static/js/787.1e2015b6.chunk.js": "/subnettingReact/static/js/787.1e2015b6.chunk.js",
+    "service-worker.js": "/subnettingReact/service-worker.js",
     "index.html": "/subnettingReact/index.html",
     "main.171406e2.css.map": "/subnettingReact/static/css/main.171406e2.css.map",
-    "main.c3bc577d.js.map": "/subnettingReact/static/js/main.c3bc577d.js.map",
+    "main.cf88c57e.js.map": "/subnettingReact/static/js/main.cf88c57e.js.map",
     "787.1e2015b6.chunk.js.map": "/subnettingReact/static/js/787.1e2015b6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.171406e2.css",
-    "static/js/main.c3bc577d.js"
+    "static/js/main.cf88c57e.js"
   ]
 }
