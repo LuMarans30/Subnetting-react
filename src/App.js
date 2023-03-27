@@ -1,9 +1,7 @@
-import { Card, CardContent, Stack } from '@mui/material';
-import { LightMode, DarkMode, Margin, Padding } from '@mui/icons-material/';
+import { Card, CardContent } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { IconButton } from '@mui/material';
 
 import { PaletteSwitch } from '@trautmann/theme-switch';
 
