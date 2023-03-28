@@ -17,17 +17,16 @@ class SubnetCalculator {
             });
 
             //Calculate the other fields
-            //var subnetRow = this.calculate(0);
 
-            for (var i = 0; i < this.subnets.length; i++) {
+            for (let i = 0; i < this.subnets.length; i++) {
 
-                var subnetRow = this.calculate(i);
+                let subnetRow = this.calculate(i);
 
                 //Add the subnet to the rows
-                this.subnets[i].broadcast = subnetRow.broadcast;
-                this.subnets[i].range = subnetRow.range;
-                this.subnets[i].realnumhost = subnetRow.realnumhost;
-                this.subnets[i].wastehost = subnetRow.wastehost;
+                this.subnets[i] = {
+                    ...this.subnets[i],
+                    ...subnetRow
+                }
 
                 if (this.subnets.length > i + 1)
                     this.subnets[i + 1].ipaddr = subnetRow.nextIp;
@@ -41,41 +40,42 @@ class SubnetCalculator {
          */
         this.calculate = function (i) {
 
-            var ip = this.subnets[i].ipaddr;
-            var numhost = parseInt(this.subnets[i].numhost) + 3; //Add 3 for the network, broadcast, and gateway addresses
+            let ip = this.subnets[i].ipaddr;
+            let numhost = parseInt(this.subnets[i].numhost) + 3; //Add 3 for the network, broadcast, and gateway addresses
+            let hostBits = this.numToNextPowerOfTwo(numhost); //Number of bits needed for the hosts
+            let cidr = 32 - hostBits; //New cidr
 
-            var hostBits = this.numToNextPowerOfTwo(numhost); //Number of bits needed to represent the number of hosts
-            var newcidr = 32 - hostBits; //New cidr
+            let realnumhost = Math.pow(2, hostBits) - 3; //New number of hosts
+            let wastehost = realnumhost - (numhost - 3); //Number of wasted hosts
 
-            var realnumhost = Math.pow(2, hostBits) - 3; //New number of hosts
-            var wastehost = realnumhost - (numhost - 3); //Number of wasted hosts
-
-            var ipbin = [];
+            let ipbin = [];
             ip.split(".").forEach(octet => {
                 ipbin.push(parseInt(octet).toString(2).padStart(8, "0"));
             });
 
-            var mask = cidrToSubnetMask(newcidr);
-            var result = getIpRange(ip, mask);
+            let mask = cidrToSubnetMask(cidr);
+            let result = getIpRange(ip, mask);
 
-            this.subnets[i].ipaddr = result.networkAddress + "/" + newcidr;
+            this.subnets[i].ipaddr = result.networkAddress + "/" + cidr;
             this.subnets[i].realnumhost = realnumhost;
             this.subnets[i].wastehost = wastehost;
 
-            var startIp = result.networkAddress.split(".");
+            let startIp = result.networkAddress.split(".");
             startIp[3] = parseInt(startIp[3]) + 1;
 
-            var endIp = result.broadcastAddress.split(".");
+            let endIp = result.broadcastAddress.split(".");
             endIp[3] = parseInt(endIp[3]) - 2;
 
-            var nextIp = this.getNextIp(result.broadcastAddress);
+            let range = startIp.join(".") + " - " + endIp.join(".");
+
+            let nextIp = this.getNextIp(result.broadcastAddress) + "/" + cidr;
 
             return {
                 broadcast: result.broadcastAddress,
-                range: startIp.join(".") + " - " + endIp.join("."),
+                range: range,
                 realnumhost: realnumhost,
                 wastehost: wastehost,
-                nextIp: nextIp + "/" + newcidr
+                nextIp: nextIp
             }
         };
 
@@ -85,9 +85,9 @@ class SubnetCalculator {
          * @returns 
          */
         function cidrToSubnetMask(cidr) {
-            var mask = [];
-            for (var i = 0; i < 4; i++) {
-                var n = Math.min(cidr, 8);
+            let mask = [];
+            for (let i = 0; i < 4; i++) {
+                let n = Math.min(cidr, 8);
                 mask.push(256 - Math.pow(2, 8 - n));
                 cidr -= n;
             }

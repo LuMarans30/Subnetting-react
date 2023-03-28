@@ -21,11 +21,8 @@ const SubnetForm = (props) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(ipaddr, " - numhost: ", numhost)
-
     //disable the two fields: ipaddr and cidr
     document.getElementById('ipaddr').disabled = true;
-
     props.OnSubmit(ipaddr, numhost)
   }
 

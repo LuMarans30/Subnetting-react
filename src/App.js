@@ -13,7 +13,7 @@ import SubnetsGrid from './SubnetsGrid';
 import './SubnetCalculator';
 import SubnetCalculator from './SubnetCalculator';
 
-var subnetCalc = new SubnetCalculator();
+let subnetCalc = new SubnetCalculator();
 
 function App() {
 
