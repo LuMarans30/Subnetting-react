@@ -18,17 +18,18 @@ const styles = {
 const SubnetForm = (props) => {
   const [ipaddr, setIpaddr] = useState('')
   const [numhost, setNumhost] = useState('')
+  const [isDisabled, setIsDisabled] = useState(false)
 
   function handleSubmit(event) {
     event.preventDefault();
     //disable the two fields: ipaddr and cidr
-    document.getElementById('ipaddr').disabled = true;
+    setIsDisabled(true);
     props.OnSubmit(ipaddr, numhost)
   }
 
   function isNumeric(str) {
     if (typeof str != "string") return false
-    return !isNaN(str) && !isNaN(parseFloat(str)) 
+    return !isNaN(str) && !isNaN(parseFloat(str))
   }
 
   return (
@@ -37,7 +38,7 @@ const SubnetForm = (props) => {
         <Stack spacing={2} direction="column" sx={{ marginBottom: 4 }}>
           <h2 style={styles.h2}>Create a new subnet</h2>
           <TextField
-            id='ipaddr'
+            disabled={isDisabled}
             type="text"
             variant='outlined'
             color='secondary'
